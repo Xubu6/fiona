@@ -1,26 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { Form, Button } from "semantic-ui-react";
 
-export default ({ location, onLocationChange }) => {
-  const [mode, setMode] = useState(
-    location && location.formattedAddress ? "read" : "write"
-  );
+import { LOCATION_COPY } from "../copy";
 
-  useEffect(() => {
-    if (location && location.formattedAddress) setMode("read");
-  }, [location]);
+export default ({ location, onLocationChange, onConfirmationChange }) => {
+  const [mode, setMode] = useState(location ? "read" : "write");
+
+  const formatAddress = () => {
+    return `${location.addressLine1}${
+      location.addressLine2 ? ` ${location.addressLine2},` : ","
+    } ${location.city}, ${location.state} ${location.postalCode}, ${
+      location.country
+    }`;
+  };
+
+  const { fields, editButton, confirmButton } = LOCATION_COPY;
+
+  const renderError = field => {
+    if (location && location[field] === "") return fields[field].error;
+  };
 
   if (mode === "read")
     return (
       <div style={{ textAlign: "center" }}>
         <div style={{ display: "inline-block", margin: "auto 1em" }}>
-          <b>{location.formattedAddress}</b>
+          <b>{formatAddress()}</b>
         </div>
         <Button
           compact
-          onClick={() => setMode("write")}
-          content="Edit"
+          style={{ margin: "10px 0 " }}
+          onClick={() => {
+            setMode("write");
+            onConfirmationChange(false);
+          }}
+          content={editButton}
           color="blue"
         />
       </div>
@@ -29,45 +43,58 @@ export default ({ location, onLocationChange }) => {
   if (mode === "write" || !location)
     return (
       <div style={{ textAlign: "left" }}>
-        <Form>
+        <Form
+          onSubmit={() => {
+            setMode("read");
+            onConfirmationChange(true);
+          }}
+        >
           <Form.Input
+            {...fields.addressLine1}
             name="addressLine1"
-            label="Address Line 1"
             onChange={onLocationChange}
+            error={renderError("addressLine1")}
             value={location ? location.addressLine1 : ""}
           />
           <Form.Input
+            {...fields.addressLine2}
             name="addressLine2"
-            label="Address Line 2"
             onChange={onLocationChange}
             value={location ? location.addressLine2 : ""}
           />
           <Form.Group widths="equal">
             <Form.Input
+              {...fields.city}
               name="city"
-              label="City"
               onChange={onLocationChange}
+              error={renderError("city")}
               value={location ? location.city : ""}
             />
             <Form.Input
+              {...fields.state}
               name="state"
-              label="State"
               onChange={onLocationChange}
+              error={renderError("state")}
               value={location ? location.state : ""}
             />
             <Form.Input
+              {...fields.country}
               name="country"
-              label="Country"
               onChange={onLocationChange}
+              error={renderError("country")}
               value={location ? location.country : ""}
             />
             <Form.Input
+              {...fields.postalCode}
               name="postalCode"
-              label="Postal code"
               onChange={onLocationChange}
+              error={renderError("postalCode")}
               value={location ? location.postalCode : ""}
             />
           </Form.Group>
+          <div style={{ textAlign: "right" }}>
+            <Form.Button content={confirmButton} positive />
+          </div>
         </Form>
       </div>
     );

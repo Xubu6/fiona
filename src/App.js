@@ -11,24 +11,59 @@ import useGeolocation from "./lib/hooks/useGeolocation";
 
 import "./App.css";
 
+const ActionButton = props => (
+  <div className="action">
+    <Button color="violet" size="massive" {...props} />
+  </div>
+);
+
 function App() {
   const { geolocation } = useGeolocation();
   const [appState, setAppState] = useState("start");
   const [location, setLocation] = useState(geolocation);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     setLocation(geolocation);
   }, [geolocation]);
 
   const [{ phoneNumber, productName }, setFormState] = useState({
-    phoneNumber: "",
-    productName: ""
+    phoneNumber: undefined,
+    productName: undefined
   });
+
+  const formatAddress = () => {
+    return `${location.addressLine1}${
+      location.addressLine2 ? ` ${location.addressLine2},` : ","
+    } ${location.city}, ${location.state} ${location.postalCode}, ${
+      location.country
+    }`;
+  };
 
   const handleStartAction = () => {
     setAppState("form");
   };
-  const handleFormAction = () => setAppState("thanks");
+
+  const handleFormAction = () => {
+    fetch("/api/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        body: `📢New Fiona Request!📢\n\n🏡 Address: ${formatAddress()}\n\n📱Phone: ${phoneNumber}\n\n🛍 Product: ${productName}`
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) setAppState("thanks");
+        else {
+          console.log(data.error);
+          setError(data.error);
+        }
+      });
+  };
+
   const handleBackAction = () => setAppState("start");
 
   const handleFormChange = (_, { name, value }) =>
@@ -37,42 +72,44 @@ function App() {
   const handleLocationChange = (_, { name, value }) =>
     setLocation(prev => ({ ...prev, [name]: value }));
 
-  const ActionButton = () => {
-    const Action = props => (
-      <Button content="Request" color="violet" size="massive" {...props} />
-    );
-    if (appState === "start")
-      return <Action content="Request" onClick={handleStartAction} />;
-    if (appState === "form")
-      return <Action content="Submit" onClick={handleFormAction} />;
-    return <Action content="Back" onClick={handleBackAction} />;
-  };
-
   return (
     <div className="App">
       <Container>
         {appState !== "form" && <Logo />}
-        {appState === "start" && <Start onActionClick={handleStartAction} />}
+        {appState === "start" && (
+          <Start
+            action={
+              <ActionButton content="Request" onClick={handleStartAction} />
+            }
+          />
+        )}
         {appState === "form" && (
-          <div style={{ textAlign: "left" }}>
-            <Icon
-              name="arrow left"
-              size="huge"
-              link
-              onClick={handleBackAction}
-            />
+          <div>
+            <div style={{ textAlign: "left" }}>
+              <Icon
+                name="arrow left"
+                size="huge"
+                link
+                onClick={handleBackAction}
+              />
+            </div>
             <Form
               location={location}
-              onActionClick={handleFormAction}
+              error={error}
+              action={
+                <ActionButton content="Submit" onClick={handleFormAction} />
+              }
               onLocationChange={handleLocationChange}
               onFormChange={handleFormChange}
             />
           </div>
         )}
-        {appState === "thanks" && <Thanks onActionClick={handleBackAction} />}
-        <div className="action">
-          <ActionButton />
-        </div>
+        {appState === "thanks" && (
+          <Thanks
+            onActionClick={handleBackAction}
+            action={<ActionButton content="Back" onClick={handleBackAction} />}
+          />
+        )}
       </Container>
     </div>
   );

@@ -1,15 +1,19 @@
 import React from "react";
 
-export default () => (
-  <>
-    <div className="header-container">
-      <div className="header">Thanks for your request!</div>
-      <div className="subheader">Keep an eye out for a text from Fiona.</div>
-    </div>
-    <div className="description-container">
-      <div className="description">
-        We'll start searching local stores near you for your product.
+import { THANKS_COPY } from "../copy";
+
+export default ({ action }) => {
+  const { header, subheader, description } = THANKS_COPY;
+  return (
+    <>
+      <div className="header-container">
+        <div className="header">{header}</div>
+        <div className="subheader">{subheader}</div>
       </div>
-    </div>
-  </>
-);
+      <div className="description-container">
+        <div className="description">{description}</div>
+      </div>
+      {action}
+    </>
+  );
+};
