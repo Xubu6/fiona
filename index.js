@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 const client = require("twilio")(
   process.env.TWILIO_ACCOUNT_SID,
@@ -24,7 +24,7 @@ app.get("/express_backend", (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  res.sendFile(path.join(__dirname+'build/index.html'));
 });
 
 app.post("/api/messages", (req, res) => {
