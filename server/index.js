@@ -6,16 +6,8 @@ const port = process.env.PORT || 4000;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-const path = require('path');
-// the __dirname is the current directory from where the script is running
-app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, 'build')));
-app.get('/ping', function (req, res) {
- return res.send('pong');
-});
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 const client = require("twilio")(
   process.env.TWILIO_ACCOUNT_SID,
@@ -24,6 +16,10 @@ const client = require("twilio")(
 
 // console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 // create a GET route
 app.get("/express_backend", (req, res) => {
