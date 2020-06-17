@@ -10,11 +10,11 @@ export const FORM_COPY = {
   fields: {
     phoneNumber: {
       label: "Phone Number",
-      placeholder: "Phone number:"
+      placeholder: "Phone number:",
     },
     productName: {
       label: "Product Name",
-      placeholder: "Product Name:"
+      placeholder: "Product Name:",
     }
   },
   error: {
