@@ -61,7 +61,7 @@ function App() {
           console.log(data.error);
           setError(data.error);
         }
-      });
+      })
   };
 
   const handleBackAction = () => setAppState("start");
@@ -71,6 +71,8 @@ function App() {
 
   const handleLocationChange = (_, { name, value }) =>
     setLocation(prev => ({ ...prev, [name]: value }));
+
+  const disabled = typeof phoneNumber === "undefined" || typeof productName === "undefined" || productName.trim() == "";
 
   return (
     <div className="App">
@@ -97,7 +99,10 @@ function App() {
               location={location}
               error={error}
               action={
-                <ActionButton content="Submit" onClick={handleFormAction} />
+                <ActionButton
+                  disabled={disabled}
+                  content="Submit" onClick={handleFormAction} 
+                />
               }
               onLocationChange={handleLocationChange}
               onFormChange={handleFormChange}

@@ -34,7 +34,6 @@ export const LOCATION_COPY = {
     addressLine2: {
       label: "Address Line 2",
       placeholder: "Apt 1A"
-      // error: { content: "Please fill out this field.", pointing: "above" }
     },
     city: {
       label: "City",
