@@ -45,7 +45,10 @@ export default ({ location, onLocationChange, onConfirmationChange }) => {
       </div>
     );
 
-  if (mode === "write" || !location)
+  if (mode === "write" || !location) {
+    if (!location) {
+      disabled = true;
+    }
     return (
       <div style={{ textAlign: "left" }}>
         <Form
@@ -106,4 +109,5 @@ export default ({ location, onLocationChange, onConfirmationChange }) => {
         </Form>
       </div>
     );
+  }
 };
