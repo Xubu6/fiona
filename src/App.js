@@ -14,7 +14,7 @@ import useGeolocation from "./lib/hooks/useGeolocation";
 
 import "./App.css";
 
-const TITLE = 'Fiona'
+const TITLE = 'Fiona';
 
 const ActionButton = props => (
   <div className="action">
