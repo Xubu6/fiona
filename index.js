@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require('path');
 const bodyParser = require("body-parser");
 
 const port = process.env.PORT || 4000;
@@ -6,6 +7,8 @@ const port = process.env.PORT || 4000;
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, 'build')));
 
 const client = require("twilio")(
   process.env.TWILIO_ACCOUNT_SID,
@@ -18,6 +21,10 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // create a GET route
 app.get("/express_backend", (req, res) => {
   res.send({ express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT" });
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/index.html'));
 });
 
 app.post("/api/messages", (req, res) => {

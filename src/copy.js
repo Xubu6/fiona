@@ -2,7 +2,7 @@ export const START_COPY = {
   header: "Need something now?",
   subheader: "Ask Fiona.",
   description:
-    "Fiona searches local stores for the item you need, so you can have it the same day."
+    "Fiona searches local stores, so you can have your item the same day."
 };
 
 export const FORM_COPY = {
@@ -10,11 +10,11 @@ export const FORM_COPY = {
   fields: {
     phoneNumber: {
       label: "Phone Number",
-      placeholder: "Phone number:"
+      placeholder: "Phone number:",
     },
     productName: {
       label: "Product Name",
-      placeholder: "Product Name:"
+      placeholder: "Product Name:",
     }
   },
   error: {
@@ -34,7 +34,6 @@ export const LOCATION_COPY = {
     addressLine2: {
       label: "Address Line 2",
       placeholder: "Apt 1A"
-      // error: { content: "Please fill out this field.", pointing: "above" }
     },
     city: {
       label: "City",

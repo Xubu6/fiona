@@ -17,8 +17,13 @@ export default ({ location, onLocationChange, onConfirmationChange }) => {
 
   const { fields, editButton, confirmButton } = LOCATION_COPY;
 
+  let disabled = false;
+
   const renderError = field => {
-    if (location && location[field] === "") return fields[field].error;
+    if (location && location[field] === "") {
+      disabled = true;
+    return fields[field].error;
+    }
   };
 
   if (mode === "read")
@@ -40,7 +45,10 @@ export default ({ location, onLocationChange, onConfirmationChange }) => {
       </div>
     );
 
-  if (mode === "write" || !location)
+  if (mode === "write" || !location) {
+    if (!location) {
+      disabled = true;
+    }
     return (
       <div style={{ textAlign: "left" }}>
         <Form
@@ -93,9 +101,13 @@ export default ({ location, onLocationChange, onConfirmationChange }) => {
             />
           </Form.Group>
           <div style={{ textAlign: "right" }}>
-            <Form.Button content={confirmButton} positive />
+            <Form.Button 
+              disabled={disabled}
+              content={confirmButton} positive 
+            />
           </div>
         </Form>
       </div>
     );
+  }
 };

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Icon } from "semantic-ui-react";
+import { Helmet } from 'react-helmet'
+import HttpsRedirect from 'react-https-redirect';
 
 import Logo from "./components/Logo";
+import YC from "./components/YC";
 
 import Start from "./components/Start";
 import Form from "./components/Form";
@@ -10,6 +13,8 @@ import Thanks from "./components/Thanks";
 import useGeolocation from "./lib/hooks/useGeolocation";
 
 import "./App.css";
+
+const TITLE = 'Fiona';
 
 const ActionButton = props => (
   <div className="action">
@@ -61,7 +66,7 @@ function App() {
           console.log(data.error);
           setError(data.error);
         }
-      });
+      })
   };
 
   const handleBackAction = () => setAppState("start");
@@ -72,46 +77,57 @@ function App() {
   const handleLocationChange = (_, { name, value }) =>
     setLocation(prev => ({ ...prev, [name]: value }));
 
+  let disabled = typeof phoneNumber === "undefined" || typeof productName === "undefined" || productName.trim() === "";
+
   return (
-    <div className="App">
-      <Container>
-        {appState !== "form" && <Logo />}
-        {appState === "start" && (
-          <Start
-            action={
-              <ActionButton content="Request" onClick={handleStartAction} />
-            }
-          />
-        )}
-        {appState === "form" && (
-          <div>
-            <div style={{ textAlign: "left" }}>
-              <Icon
-                name="arrow left"
-                size="huge"
-                link
-                onClick={handleBackAction}
+    <HttpsRedirect>
+      <Helmet>
+        <title>{ TITLE }</title>
+      </Helmet>
+      <div className="App">
+        <Container>
+          <YC />
+          {appState !== "form" && <Logo />}
+          {appState === "start" && (
+            <Start
+              action={
+                <ActionButton content="Request" onClick={handleStartAction} />
+              }
+            />
+          )}
+          {appState === "form" && (
+            <div>
+              <div style={{ textAlign: "left" }}>
+                <Icon
+                  name="arrow left"
+                  size="huge"
+                  link
+                  onClick={handleBackAction}
+                />
+              </div>
+              <Form
+                location={location}
+                error={error}
+                action={
+                  <ActionButton
+                    disabled={disabled}
+                    content="Submit" onClick={handleFormAction} 
+                  />
+                }
+                onLocationChange={handleLocationChange}
+                onFormChange={handleFormChange}
               />
             </div>
-            <Form
-              location={location}
-              error={error}
-              action={
-                <ActionButton content="Submit" onClick={handleFormAction} />
-              }
-              onLocationChange={handleLocationChange}
-              onFormChange={handleFormChange}
+          )}
+          {appState === "thanks" && (
+            <Thanks
+              onActionClick={handleBackAction}
+              action={<ActionButton content="Back" onClick={handleBackAction} />}
             />
-          </div>
-        )}
-        {appState === "thanks" && (
-          <Thanks
-            onActionClick={handleBackAction}
-            action={<ActionButton content="Back" onClick={handleBackAction} />}
-          />
-        )}
-      </Container>
-    </div>
+          )}
+        </Container>
+      </div>
+    </HttpsRedirect>
   );
 }
 

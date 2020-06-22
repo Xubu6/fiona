@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
 .App {
   text-align: center;
 }
@@ -5,6 +7,18 @@
 .App-logo {
   height: 30vmin;
   pointer-events: none;
+  padding-top: 25px;
+}
+
+.YC-logo {
+  height: 5vmin;
+  pointer-events: none;
+  position: absolute;
+  bottom: 25px;
+  left:50%;
+  margin-left:-50px;
+  text-align:center;
+  width:100px
 }
 
 .container {
@@ -19,13 +33,17 @@
 }
 
 .header {
-  font-size: calc(20px + 2vmin);
+  font-family: 'Lato', sans-serif;
+  font-size: calc(24px + 2vmin);
+  font-weight: normal;
   line-height: 1em;
   padding: 10px;
 }
 
 .subheader {
-  font-size: calc(18px + 2vmin);
+  font-family: 'Lato', sans-serif;
+  font-size: calc(22px + 2vmin);
+  font-weight: normal;
   line-height: 1em;
   padding: 10px;
 }
@@ -35,7 +53,9 @@
 }
 
 .description {
-  font-size: calc(10px + 2vmin);
+  font-family: 'Lato', sans-serif;
+  font-size: calc(12px + 2vmin);
+  font-weight: lighter;
   line-height: 1.5em;
   width: 66%;
   margin: auto;
