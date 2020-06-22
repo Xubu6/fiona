@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Icon } from "semantic-ui-react";
 import { Helmet } from 'react-helmet'
+import HttpsRedirect from 'react-https-redirect';
 
 import Logo from "./components/Logo";
+import YC from "./components/YC";
 
 import Start from "./components/Start";
 import Form from "./components/Form";
@@ -75,15 +77,16 @@ function App() {
   const handleLocationChange = (_, { name, value }) =>
     setLocation(prev => ({ ...prev, [name]: value }));
 
-  let disabled = typeof phoneNumber === "undefined" || typeof productName === "undefined" || productName.trim() == "";
+  let disabled = typeof phoneNumber === "undefined" || typeof productName === "undefined" || productName.trim() === "";
 
   return (
-    <>
+    <HttpsRedirect>
       <Helmet>
         <title>{ TITLE }</title>
       </Helmet>
       <div className="App">
         <Container>
+          <YC />
           {appState !== "form" && <Logo />}
           {appState === "start" && (
             <Start
@@ -124,7 +127,7 @@ function App() {
           )}
         </Container>
       </div>
-    </>
+    </HttpsRedirect>
   );
 }
 

@@ -22,7 +22,7 @@ export default ({ location, onLocationChange, onConfirmationChange }) => {
   const renderError = field => {
     if (location && location[field] === "") {
       disabled = true;
-      return fields[field].error;
+    return fields[field].error;
     }
   };
 
