@@ -50,7 +50,8 @@
 }
 
 .description-container {
-  margin: 6% auto;
+  margin-top: 3% auto;
+  margin-bottom: 3% auto;
 }
 
 .description {
@@ -79,4 +80,5 @@
   width: 575x;
   text-align: left;
   margin: auto;
+  padding-bottom: 6% auto;
 }
