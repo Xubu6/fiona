@@ -12,7 +12,6 @@
 
 .YC-logo {
   height: 5vmin;
-  pointer-events: none;
   position: absolute;
   bottom: 25px;
   left:50%;
@@ -75,7 +74,6 @@
 
 .action {
   margin: 40px 0;
-  color:#9370DB;
 }
 
 .form-container {
