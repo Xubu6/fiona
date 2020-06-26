@@ -2,6 +2,7 @@
 
 .App {
   text-align: center;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -21,11 +22,13 @@
 }
 
 .container {
-  min-height: 100vh;
+  position: fixed;
+  height: 100%;
   display: flex;
+  left: 50%;
+  transform: translate(-50%, 0);
   flex-direction: column;
   align-items: center;
-  position: relative;
 }
 
 .header-container {
