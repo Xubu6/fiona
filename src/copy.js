@@ -7,7 +7,12 @@ export const START_COPY = {
 
 export const FORM_COPY = {
   header: "Just fill this out...",
+  subheader: "We need your address so we can contact local stores near you.",
   fields: {
+    distance: {
+      label: "Travel Radius",
+      placeholder: "How far are you willing to travel? (ex. 10 miles)"
+    },
     phoneNumber: {
       label: "Phone Number",
       placeholder: "Phone number:",

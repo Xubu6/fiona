@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet'
 import HttpsRedirect from 'react-https-redirect';
 
 import Logo from "./components/Logo";
-import YC from "./components/YC";
 
 import Start from "./components/Start";
 import Form from "./components/Form";
@@ -32,7 +31,8 @@ function App() {
     setLocation(geolocation);
   }, [geolocation]);
 
-  const [{ phoneNumber, productName }, setFormState] = useState({
+  const [{ distance, phoneNumber, productName }, setFormState] = useState({
+    distance: undefined,
     phoneNumber: undefined,
     productName: undefined
   });
@@ -56,7 +56,7 @@ function App() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        body: `📢New Fiona Request!📢\n\n🏡 Address: ${formatAddress()}\n\n📱Phone: ${phoneNumber}\n\n🛍 Product: ${productName}`
+        body: `📢New Fiona Request!📢\n\n🏡 Address: ${formatAddress()}\n\n 🚘 Search Radius: ${distance} \n\n📱Phone: ${phoneNumber}\n\n🛍 Product: ${productName}`
       })
     })
       .then(res => res.json())

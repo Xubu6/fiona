@@ -18,7 +18,7 @@ export default ({
     location ? true : false
   );
 
-  const { header, fields } = FORM_COPY;
+  const { header, subheader, fields } = FORM_COPY;
 
   return (
     <>
@@ -26,6 +26,9 @@ export default ({
         <div className="header-container" style={{ paddingLeft: "unset" }}>
           <div className="header" style={{ textAlign: "left" }}>
             <RoughNotation type="underline" show={true} color="#9370DB" animationDelay="500">{header}</RoughNotation>
+          </div>
+          <div className="form-subheader" style={{ textAlign: "left" }}>
+            {subheader}
           </div>
         </div>
         <Location
@@ -47,6 +50,11 @@ export default ({
                 {...fields.productName}
                 name="productName"
                 placeholder="Product Name:"
+                onChange={onFormChange}
+              />
+              <Form.Input
+                {...fields.distance}
+                name="distance"
                 onChange={onFormChange}
               />
               <Message error {...FORM_COPY.error} />
