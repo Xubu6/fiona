@@ -2,7 +2,7 @@ export const START_COPY = {
   header: "Need something now?",
   subheader: "Ask Fiona.",
   description:
-    "Fiona searches local stores, so you can have your item the same day."
+    "Fiona searches local stores, so you can have your item \n the same day."
 };
 
 export const FORM_COPY = {

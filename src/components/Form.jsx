@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Message } from "semantic-ui-react";
+import { RoughNotation } from "react-rough-notation";
 
 import PhoneInput from "./PhoneInput";
 import Location from "./Location";
@@ -23,7 +24,7 @@ export default ({
       <div className="form-container">
         <div className="header-container" style={{ paddingLeft: "unset" }}>
           <div className="header" style={{ textAlign: "left" }}>
-            {header}
+            <RoughNotation type="underline" show={true} color="#9370DB" animationDelay="500">{header}</RoughNotation>
           </div>
         </div>
         <Location

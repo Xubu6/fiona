@@ -86,7 +86,7 @@ function App() {
       </Helmet>
       <div className="App">
         <Container>
-          <YC />
+          {appState !== "form" && <YC />}
           {appState !== "form" && <Logo />}
           {appState === "start" && (
             <Start
