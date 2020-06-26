@@ -16,6 +16,9 @@ function Start({ action }) {
         <div className="description">{description}</div>
       </div>
       {action}
+      <div className ="yc-container">
+        <YC />
+      </div>
     </>
   );
 }

@@ -5,6 +5,7 @@ import { RoughNotation } from "react-rough-notation";
 import PhoneInput from "./PhoneInput";
 import Location from "./Location";
 import { FORM_COPY } from "../copy";
+import YC from './YC';
 
 export default ({
   location,
@@ -54,6 +55,9 @@ export default ({
         )}
       </div>
       {locationConfirmed && action}
+      <div className ="yc-container">
+        <YC />
+      </div>
     </>
   );
 };
