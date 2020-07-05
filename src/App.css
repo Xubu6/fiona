@@ -35,7 +35,7 @@
   font-family: 'Lato', sans-serif;
   font-size: calc(24px + 2vmin);
   font-weight: normal;
-  line-height: 1em;
+  line-height: 1;
   padding: 10px;
 }
 
@@ -43,7 +43,7 @@
   font-family: 'Lato', sans-serif;
   font-size: calc(22px + 2vmin);
   font-weight: normal;
-  line-height: 1em;
+  line-height: 1;
   padding: 10px;
   display: inline-flex;
 }
@@ -52,7 +52,7 @@
   font-family: 'Lato', sans-serif;
   font-size: calc(8px + 1vmin);
   font-weight: lighter;
-  line-height: 0.5em;
+  line-height: 0.5;
   padding: 10px;
 }
 
@@ -65,7 +65,7 @@
   font-family: 'Lato', sans-serif;
   font-size: calc(12px + 2vmin);
   font-weight: lighter;
-  line-height: 1.5em;
+  line-height: 1.5;
   width: 66%;
   margin: auto;
 }
