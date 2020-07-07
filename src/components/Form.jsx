@@ -63,9 +63,6 @@ export default ({
         )}
       </div>
       {locationConfirmed && action}
-      <div className ="yc-container">
-        <YC />
-      </div>
     </>
   );
 };
