@@ -1,4 +1,5 @@
 import React from "react";
+import { RoughNotation } from "react-rough-notation";
 
 import { THANKS_COPY } from "../copy";
 import YC from './YC';
@@ -9,7 +10,7 @@ export default ({ action }) => {
     <>
       <div className="header-container">
         <div className="header">{header}</div>
-        <div className="subheader">{subheader}</div>
+        <RoughNotation className="subheader" type="highlight" show={true} color="#9370DB" animationDelay="500">{subheader}</RoughNotation>
       </div>
       <div className="description-container">
         <div className="description">{description}</div>
