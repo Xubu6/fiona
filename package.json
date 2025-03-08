@@ -19,7 +19,7 @@
     "react-rough-notation": "^0.1.0",
     "react-scripts": "3.4.1",
     "semantic-ui-react": "^0.88.2",
-    "twilio": "^3.45.0"
+    "twilio": "^5.4.5"
   },
   "devDependencies": {
     "node-env-run": "^3.0.2",
